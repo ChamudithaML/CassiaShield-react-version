@@ -6,6 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Navbar from './components/Navbar';
 import Home from './components/Pages/Home';
+import Image from './components/Pages/Image';
 
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
         <Navbar />
         <Routes>
           <Route path='/' exact element={<Home/>} />
+          <Route path='/image' element={<Image/>} />
         </Routes>
       </div>
 
