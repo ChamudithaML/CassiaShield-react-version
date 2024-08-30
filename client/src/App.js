@@ -2,8 +2,11 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import './App.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Navbar from './components/Navbar';
+import Home from './components/Pages/Home';
+
 
 function App() {
   return (
@@ -11,7 +14,7 @@ function App() {
       <div>
         <Navbar />
         <Routes>
-          <Route />
+          <Route path='/' exact element={<Home/>} />
         </Routes>
       </div>
 

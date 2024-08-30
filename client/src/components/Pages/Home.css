@@ -1,0 +1,75 @@
+.hero-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    background-image: url('../../../public/images/cover.jpg');
+    background-size: 100% 100%;
+    /* Makes the image cover the entire area */
+    background-position: center;
+    /* Centers the image */
+    background-repeat: no-repeat;
+    /* Prevents the image from repeating */
+    height: 35vw;
+}
+
+.hero-header {
+    color: rgb(33, 238, 125);
+    font-size: 120px;
+    font-family: 'Nerko One', sans-serif;
+    text-shadow: 8px 3px 5px rgba(255, 255, 255, 0.7);
+}
+
+.desc {
+    font-size: 45px;
+    color: white;
+    text-shadow:
+        -2px -2px 0 black,
+        2px -2px 0 black,
+        -2px 2px 0 black,
+        2px 2px 0 black;
+}
+
+.opt-btns {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    width: 50%;
+}
+
+.btn-wdth {
+    width: 100%;
+}
+
+.abt-main{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* position: relative; */
+    margin-top: 20px;
+}
+
+.abt-cassia {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 60%;
+}
+
+@media screen and (max-width: 960px) {
+
+    .hero-header {
+        color: aqua;
+        font-size: 45px;
+    }
+
+    .desc {
+        font-size: 25px;
+    }
+
+
+}
