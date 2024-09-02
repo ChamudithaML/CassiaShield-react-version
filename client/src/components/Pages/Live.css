@@ -1,0 +1,18 @@
+.live-video-container {
+    text-align: center;
+}
+
+.live-video-title {
+    text-align: center;
+}
+
+.live-video-wrapper {
+    justify-content: center;
+    display: flex;
+    margin-top: 30px;
+}
+
+.live-video {
+    height: 450px;
+    width: 550px;
+}
