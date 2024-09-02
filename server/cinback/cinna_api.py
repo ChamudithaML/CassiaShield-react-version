@@ -62,4 +62,19 @@ def upload_file():
         return jsonify({'prediction': pred, 'treatment':treat}), 200
 
 
+# ---------------------------------------------------------------------------------------------------------------------------------------------
 
+@app.route('/video')
+def video():
+    return Response(gen(Video()),
+                    mimetype='multipart/x-mixed-replace; boundary=frame')
+
+
+def gen(obj):
+    img_text = ''
+    image_x, image_y = 500, 500
+    while True:
+        frame = obj.get_frame(img_text, image_x, image_y)
+        yield (b'--frame\r\n'
+               b'Content-Type: image/jpeg\r\n\r\n' + frame +
+               b'\r\n\r\n')
