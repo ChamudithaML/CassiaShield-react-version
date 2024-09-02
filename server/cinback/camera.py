@@ -5,7 +5,6 @@ import numpy as np  # numpy for arrays
 from tensorflow.keras.preprocessing import image
 from tensorflow.keras.models import load_model  # importing keras load_model to import model
 
-
 class Video(object):
     def __init__(self):
         # self.video = cv.VideoCapture(0, cv.CAP_DSHOW)
@@ -24,34 +23,9 @@ class Video(object):
                 # Memory growth must be set before GPUs have been initialized
                 print(e)
 
-        self.classifier = load_model('cinback/models/cinna3.h5')
         self.classifier2 = load_model('cinback/models/CinaMiNet2.h5')
         self.classes = ['Lower Mite Galls', 'Healthy', 'Yellow Cholorosis']
 
-    def predictor(self):
-        test_image = image.load_img('cinback/1.png', target_size=(150, 150))
-        test_image = image.img_to_array(test_image)
-        test_image = np.expand_dims(test_image, axis=0)
-
-        result = self.classifier.predict(test_image)
-
-        # accessing the prediction result
-        result1 = result[0]
-
-        # variable to hold array index
-        k = 0
-
-        # this loop to assign class name according to output
-        for i in range(3):
-            if result1[i] == 1.:
-                k = i
-                break
-
-        # taking class name using index and storing it in variable
-        prediction = self.classes[k]
-
-        # returning class name
-        return prediction
     
     def predictor2(self):
         test_image = image.load_img('cinback/1.png', target_size=(150, 150))
