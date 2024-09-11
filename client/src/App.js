@@ -8,6 +8,7 @@ import Navbar from './components/Navbar';
 import Home from './components/Pages/Home';
 import Image from './components/Pages/Image';
 import Live from './components/Pages/Live';
+import Footer from './components/Footer';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path='/image' element={<Image/>} />
           <Route path='/live' exact element={<Live />} />
         </Routes>
+        <Footer />
       </div>
 
     </BrowserRouter>
