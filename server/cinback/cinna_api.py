@@ -9,6 +9,11 @@ from cinback.img_classify_vgg import prediction_func4
 from cinback.img_classify_inception import prediction_func5
 from cinback.camera import Video
 
+from pymongo import MongoClient
+from werkzeug.security import generate_password_hash
+from flask_bcrypt import Bcrypt
+bcrypt = Bcrypt(app)
+
 import tensorflow as tf
 gpus = tf.config.list_physical_devices('GPU')
 if gpus:
@@ -61,7 +66,6 @@ def upload_file():
         # return jsonify({'message': 'File uploaded successfully '+pred}), 200
         return jsonify({'prediction': pred, 'treatment':treat}), 200
 
-
 # ---------------------------------------------------------------------------------------------------------------------------------------------
 
 @app.route('/video')
@@ -78,3 +82,37 @@ def gen(obj):
         yield (b'--frame\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + frame +
                b'\r\n\r\n')
+
+# ---------------------------------------------------------------------------------------------------------------------------------------------
+
+# MongoDB db setup
+client = MongoClient('mongodb://localhost:27017/')
+db = client['cassia_database']
+users_collection = db['users']
+
+@app.route('/signup', methods=['POST'])
+def signup():
+    data = request.get_json()
+    username = data.get('username')
+    email = data.get('email')
+    password = data.get('password')
+
+    if not username or not email or not password:
+        return jsonify({'error': 'All fields are required'}), 400
+
+    if users_collection.find_one({'email': email}):
+        return jsonify({'error': 'User already exists'}), 400
+
+    hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
+
+    user = {
+        'username': username,
+        'email': email,
+        'password': hashed_password
+    }
+
+    users_collection.insert_one(user)
+
+    return jsonify({'message': 'User created successfully'}), 201
+
+# ------------------------------------------------------------------------------------
