@@ -9,6 +9,7 @@ import Home from './components/Pages/Home';
 import Image from './components/Pages/Image';
 import Live from './components/Pages/Live';
 import Footer from './components/Footer';
+import Signup from './components/Pages/Signup';
 
 function App() {
   return (
@@ -18,7 +19,8 @@ function App() {
         <Routes>
           <Route path='/' exact element={<Home/>} />
           <Route path='/image' element={<Image/>} />
-          <Route path='/live' exact element={<Live />} />
+          <Route path='/live' element={<Live />} />
+          <Route path='/signup' element={<Signup />} />
         </Routes>
         <Footer />
       </div>
