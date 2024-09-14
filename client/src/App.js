@@ -10,6 +10,7 @@ import Image from './components/Pages/Image';
 import Live from './components/Pages/Live';
 import Footer from './components/Footer';
 import Signup from './components/Pages/Signup';
+import Login from './components/Pages/Login';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path='/' exact element={<Home/>} />
           <Route path='/image' element={<Image/>} />
           <Route path='/live' element={<Live />} />
+          <Route path='/login' element={<Login />} />
           <Route path='/signup' element={<Signup />} />
         </Routes>
         <Footer />
