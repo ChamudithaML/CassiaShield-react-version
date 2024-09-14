@@ -116,3 +116,19 @@ def signup():
     return jsonify({'message': 'User created successfully'}), 201
 
 # ------------------------------------------------------------------------------------
+
+@app.route('/login', methods=['POST'])
+def login():
+    data = request.get_json()
+    email = data.get('email')
+    password = data.get('password')
+
+    if not email or not password:
+        return jsonify({'error': 'Email and password are required'}), 400
+
+    user = users_collection.find_one({'email': email})
+
+    if user and bcrypt.check_password_hash(user['password'], password):
+        return jsonify({'message': 'Login successful'}), 200
+    else:
+        return jsonify({'error': 'Invalid email or password'}), 401
