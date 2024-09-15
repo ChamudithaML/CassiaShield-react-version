@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './Login.css'; // Ensure to create this CSS file for styling
+import './Login.css'; 
 
 function Login() {
     const [email, setEmail] = useState('');
@@ -15,7 +15,6 @@ function Login() {
         }
 
         try {
-            // Replace with your backend API URL
             const response = await fetch('http://localhost:5000/login', {
                 method: 'POST',
                 headers: {
@@ -30,7 +29,7 @@ function Login() {
 
             const result = await response.json();
             console.log(result);
-            // Handle successful login here (e.g., redirect to another page)
+            // (redirect to home page)
 
         } catch (error) {
             setError(error.message);
