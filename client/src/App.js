@@ -11,20 +11,28 @@ import Live from './components/Pages/Live';
 import Footer from './components/Footer';
 import Signup from './components/Pages/Signup';
 import Login from './components/Pages/Login';
+import { useState } from 'react';
 
 function App() {
+
+  const [logged,setLogged] = useState(false)
+
+  const checkLogged = (setVisible) => {
+    setLogged(setVisible);
+  }
+
   return (
     <BrowserRouter>
       <div>
-        <Navbar />
+        {logged && <Navbar />}
         <Routes>
-          <Route path='/' exact element={<Home/>} />
+          <Route path='/home' exact element={<Home/>} />
           <Route path='/image' element={<Image/>} />
           <Route path='/live' element={<Live />} />
-          <Route path='/login' element={<Login />} />
-          <Route path='/signup' element={<Signup />} />
+          <Route path='/login' element={<Login checkLogged={checkLogged} />} />
+          <Route path='/' element={<Signup checkLogged={checkLogged} />} />
         </Routes>
-        <Footer />
+        {logged && <Footer />}
       </div>
 
     </BrowserRouter>

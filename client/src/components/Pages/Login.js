@@ -1,10 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Login.css'; 
+import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-function Login() {
+function Login({checkLogged}) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        checkLogged(false);  
+    }, []);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -29,6 +36,8 @@ function Login() {
 
             const result = await response.json();
             console.log(result);
+            checkLogged(true);
+            navigate('/home');
             // (redirect to home page)
 
         } catch (error) {
@@ -63,6 +72,10 @@ function Login() {
                 {error && <p className="error">{error}</p>}
                 <button type="submit" className="btn">Login</button>
             </form>
+
+            <Link to='/'>
+                Sign Up From Here
+            </Link>
         </div>
     );
 }

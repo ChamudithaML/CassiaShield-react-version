@@ -1,15 +1,27 @@
 import React from 'react'
 import './Home.css'
+import { useNavigate } from 'react-router-dom';
 
 function Home() {
+
+    const navigate = useNavigate();
+
+    const toImageUpload = () => {
+        navigate('/image');
+    }
+
+    const toRealtime = () => {
+        navigate('/live');
+    }
+
     return (
         <>
             <div className='hero-container'>
                 <h1 className='hero-header'>CassiaShield</h1>
                 <p className='desc'>Inovative Agriculture</p>
                 <div className="opt-btns">
-                    <button className='btn btn-primary btn-lg btn-wdth'>Find Disease</button>
-                    <button className='btn btn-primary btn-lg btn-wdth'>Scan Disease</button>
+                    <button className='btn btn-primary btn-lg btn-wdth' onClick={toImageUpload}>Find Disease</button>
+                    <button className='btn btn-primary btn-lg btn-wdth' onClick={toRealtime}>Scan Disease</button>
                 </div>
             </div>
             <div className='abt-main'>

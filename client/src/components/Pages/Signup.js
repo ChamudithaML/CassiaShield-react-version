@@ -1,23 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Signup.css';
+import { Link } from 'react-router-dom';
 
-function Signup() {
+function Signup({checkLogged}) {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [error, setError] = useState('');
 
+    useEffect(() => {
+        checkLogged(false);  
+    }, []);
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         if (!username || !email || !password || !confirmPassword) {
             setError('Please fill in all fields');
+            alert("Error: " + error)
             return;
         }
 
         if (password !== confirmPassword) {
             setError('Passwords do not match');
+            alert("Error: " + error)
             return;
         }
 
@@ -31,17 +38,28 @@ function Signup() {
             });
 
             if (!response.ok) {
+                console.log(response)
+                alert("Signup Failed")
                 throw new Error('Signup failed');
             }
 
             const result = await response.json();
+            alert(result.message)
             console.log(result);
+            resetFields();
             // redirect to login
 
         } catch (error) {
             setError(error.message);
         }
     };
+
+    const resetFields = () => {
+        setUsername("");
+        setEmail("");
+        setPassword("");
+        setConfirmPassword("");
+    }
 
     return (
         <div className="signup-container">
@@ -64,7 +82,7 @@ function Signup() {
                         id="email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        required
+                    // required
                     />
                 </div>
                 <div className="form-group">
@@ -90,6 +108,10 @@ function Signup() {
                 {/* {error && <p className="error">{error}</p>} */}
                 <button type="submit" className="btn">Sign Up</button>
             </form>
+
+            <Link to='/login'>
+                Login From Here
+            </Link>
         </div>
     );
 }

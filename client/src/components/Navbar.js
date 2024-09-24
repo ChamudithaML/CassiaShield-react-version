@@ -34,13 +34,13 @@ function Navbar() {
     <nav className='navbar'>
       <div className='container-main'>
 
-        <Link to="/" className='cassia-logo' onClick={closeMobileMenu}>
+        <Link to="/home" className='cassia-logo' onClick={closeMobileMenu}>
           CassiaShield <span style={{ color: 'transparent' }}>0</span><i className="fas fa-coffee"></i>
         </Link>
 
         <div className={click ? 'ul-menu active' : 'ul-menu'}>
           <div className='nav-front'>
-            <Link to='/' className='ul-links' onClick={closeMobileMenu}>
+            <Link to='/home' className='ul-links' onClick={closeMobileMenu}>
               Home
             </Link>
             <Link to='/image' className='ul-links' onClick={closeMobileMenu}>
@@ -57,7 +57,7 @@ function Navbar() {
             <Link to='/login' className='ul-links' onClick={closeMobileMenu}>
               Log In
             </Link>
-            <Link to='/signup' className='ul-links' onClick={closeMobileMenu}>
+            <Link to='/' className='ul-links' onClick={closeMobileMenu}>
               Sign Up
             </Link>
           </div>
