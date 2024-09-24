@@ -64,7 +64,7 @@ def upload_file():
             treat = treatments[2]
         
         # return jsonify({'message': 'File uploaded successfully '+pred}), 200
-        return jsonify({'prediction': pred, 'treatment':treat}), 200
+        return jsonify({'prediction': pred, 'treatment':treat, 'filename':file.filename}), 200
 
 # ---------------------------------------------------------------------------------------------------------------------------------------------
 

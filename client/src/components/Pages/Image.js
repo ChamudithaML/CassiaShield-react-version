@@ -5,9 +5,19 @@ import axios from 'axios';
 function Image() {
 
     const [file, setFile] = useState(null);
+    const [prediction, setPrediction] = useState("")
+    const [treatment, setTreatment] = useState("")
+    const [imageUrl, setImageUrl] = useState('');
 
     const handleChange = (e) => {
-        setFile(e.target.files[0]);
+        const selectedFile = e.target.files[0];
+        if (selectedFile) {
+            setFile(selectedFile);
+            const url = URL.createObjectURL(selectedFile);
+            setImageUrl(url);
+            setPrediction("")
+            setTreatment("")
+        }
     };
 
     const handleClick = (e) => {
@@ -17,9 +27,13 @@ function Image() {
 
         axios.post('http://localhost:5000/upload', formData)
             .then((response) => {
-                alert('File uploaded successfully');
+                // console.log(response.data);
+                // alert('File uploaded successfully ' + response.data.prediction);
+                setPrediction(response.data.prediction)
+                setTreatment(response.data.treatment)
             })
             .catch((error) => {
+                console.log(error);
                 alert('Error uploading file');
             });
     };
@@ -38,6 +52,13 @@ function Image() {
                 <button className='btn btn-primary' onClick={handleClick}>Submit</button>
             </form>
 
+            {file &&
+                <div className='uploaded-image'>
+                    <img src={imageUrl} alt="Uploaded" style={{ maxWidth: '100%', maxHeight: '200px' }} />
+                </div>}
+
+            {prediction && <p>Detected disease is: {prediction}</p>}
+            {treatment && <p>Treatments for disease: {treatment}</p>}
         </div>
     )
 }
